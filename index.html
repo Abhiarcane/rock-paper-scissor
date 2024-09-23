@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <title>Rock Paper Scissors</title>
+  </head>
+  <body>
+    <div class="heading">
+      <div class="heading-left">
+        <p>Rock</p>
+        <p>Paper</p>
+        <p>Scissors</p>
+      </div>
+
+      <div class="heading-right">
+        <div class="score-box">
+          <div class="score">
+            <p>Computer</p>
+            <p>Score</p>
+          </div>
+          <div class="number computer-score">0</div>
+        </div>
+        <div class="score-box">
+          <div class="score">
+            <p>Your</p>
+            <p>Score</p>
+          </div>
+          <div class="number player-score">0</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="icon-box">
+      <div class="fig fig1">
+        <img src="group2.png" alt="Icon 1" />
+        <img src="fist.png" alt="" class="action fist" />
+      </div>
+      <div class="fig fig2">
+        <img src="group3.png" alt="Icon 2" />
+        <img src="scissor.png" alt="" class="action scissor" />
+      </div>
+      <div class="fig fig3">
+        <img src="group1.png" alt="Icon 3" />
+        <img src="hand.png" alt="" class="action hand" />
+      </div>
+
+      <!-- Connecting Lines -->
+      <img src="Line 1.png" class="line1" alt="Line 1" />
+      <img src="Line 2.png" class="line2" alt="Line 2" />
+      <img src="Line 3.png" class="line3" alt="Line 3" />
+    </div>
+
+    <div class="rules-box">
+      <button class="xbtn"><img src="x.png" alt="" /></button>
+      <div class="rules-heading">GAME RULES</div>
+      <ul style="list-style-type: square">
+        <li>Rock beats scissors, scissors beat paper, and paper beats rock.</li>
+        <li>
+          Agree ahead of time whether you’ll count off “rock, paper, scissors,
+          shoot” or just “rock, paper, scissors.”
+        </li>
+        <li>
+          Use rock, paper, scissors to settle minor decisions or simply play to
+          pass the time
+        </li>
+        <li>
+          If both players lay down the same hand, each player lays down another
+          hand
+        </li>
+      </ul>
+    </div>
+
+    <div class="btns">
+      <button class="rules btn" id="rulesBtn">RULES</button>
+      <button class="next btn">NEXT</button>
+    </div>
+    <div class="win">
+      <div>HURRAY!!</div>
+      <div>YOU WIN THE GAME</div>
+      <button class="btn">PLAY AGAIN</button>
+    </div>
+  </body>
+  <script>
+    let playerScore = 0;
+    let computerScore = 0;
+
+    // Add event listener to the Play Again button to reload the game
+    document.querySelector(".btn").addEventListener("click", function () {
+      location.reload(); // Reload the page to reset the game
+    });
+
+    // Function to generate a random figure for the computer
+    function getComputerChoice() {
+      const choices = ["fig1", "fig2", "fig3"];
+      return choices[Math.floor(Math.random() * choices.length)];
+    }
+
+    // Function to determine the winner and update scores
+    function determineWinner(playerChoice, computerChoice) {
+      if (playerChoice === computerChoice) {
+        return "It's a Tie";
+      }
+
+      if (
+        (playerChoice === "fig1" && computerChoice === "fig2") || // Rock beats Scissors
+        (playerChoice === "fig2" && computerChoice === "fig3") || // Scissors beat Hand
+        (playerChoice === "fig3" && computerChoice === "fig1") // Hand beats Rock
+      ) {
+        playerScore += 1;
+        return "You win!";
+      } else {
+        computerScore += 1;
+        return "Computer wins!";
+      }
+    }
+
+    // Function to reset unwanted classes or inline styles
+    function cleanFigureClasses(figure) {
+      figure.classList.remove("fig1", "fig2", "fig3"); // Remove layout-specific classes
+      figure.removeAttribute("style"); // Remove inline styles
+    }
+
+    // Function to reset the game view
+    function resetGame() {
+      document.querySelector(".icon-box").style.display = "flex"; // Show the icons again
+      document.querySelector(".result-container").remove(); // Remove the result container
+    }
+
+    // Function to update the score display in the heading
+    function updateScoreDisplay() {
+      document.querySelector(".player-score").innerText = playerScore;
+      document.querySelector(".computer-score").innerText = computerScore;
+    }
+
+    // Function to toggle the visibility of the rules box
+    function toggleRules() {
+      const rulesBox = document.querySelector(".rules-box");
+      const rulesBtn = document.getElementById("rulesBtn");
+
+      if (rulesBox.style.display === "block") {
+        rulesBox.style.display = "none"; // Hide rules box
+        rulesBtn.style.display = "block"; // Show rules button
+      } else {
+        rulesBox.style.display = "block"; // Show rules box
+        rulesBtn.style.display = "none"; // Hide rules button
+      }
+    }
+
+    function closeRules() {
+      document.querySelector(".rules-box").style.display = "none";
+      document.getElementById("rulesBtn").style.display = "block"; // Show the rules button again
+    }
+
+    // Event listener for the rules button
+    document.getElementById("rulesBtn").addEventListener("click", toggleRules);
+    document.querySelector(".xbtn").addEventListener("click", closeRules);
+
+    // Event listener for the NEXT button
+
+    // Event listener for when a figure is clicked
+    function setupGame() {
+      const figures = document.querySelectorAll(".fig");
+
+      figures.forEach((fig) => {
+        fig.addEventListener("click", function () {
+          // Hide all original figures
+          document.querySelector(".icon-box").style.display = "none";
+
+          // Determine player's choice
+          const playerChoice = this.classList.contains("fig1")
+            ? "fig1"
+            : this.classList.contains("fig2")
+            ? "fig2"
+            : "fig3";
+
+          // Get a random computer choice
+          const computerChoice = getComputerChoice();
+
+          // Create a new result container
+          const resultContainer = document.createElement("div");
+          resultContainer.classList.add("result-container");
+
+          // Create the player figure
+          const playerFig = this.cloneNode(true); // Clone full figure
+          cleanFigureClasses(playerFig); // Clean up classes and styles
+          playerFig.classList.add("player-fig"); // Specific class for player figure
+
+          // Create the result text
+          const resultText = document.createElement("div");
+          resultText.classList.add("result-text");
+
+          // Determine the result and format the message
+          const result = determineWinner(playerChoice, computerChoice);
+          const message =
+            result === "You win!"
+              ? "YOU WIN"
+              : result === "Computer wins!"
+              ? "YOU LOST"
+              : "IT'S A DRAW";
+
+          resultText.innerHTML = `${message}<br><span class="against-pc">AGAINST PC</span>`;
+
+          // Create the computer figure
+          const computerFig = document
+            .querySelector(`.${computerChoice}`)
+            .cloneNode(true);
+          cleanFigureClasses(computerFig); // Clean up classes and styles
+          computerFig.classList.add("computer-fig"); // Specific class for computer figure
+
+          // Create the Play Again button
+          const playAgainButton = document.createElement("button");
+          playAgainButton.innerText = "PLAY AGAIN";
+          playAgainButton.classList.add("play-again-button");
+          playAgainButton.addEventListener("click", resetGame);
+
+          // Keep the heading visible and update scores
+          updateScoreDisplay();
+
+          // Clear only the icon-box and append the new result container
+          document.querySelector("body").appendChild(resultContainer);
+
+          // Append player figure, result text, computer figure, and Play Again button to the result container
+          resultContainer.appendChild(playerFig);
+          resultContainer.appendChild(resultText);
+          resultContainer.appendChild(computerFig);
+          resultContainer.appendChild(playAgainButton);
+        });
+      });
+    }
+
+    // Run the setup function once the page loads
+    window.onload = setupGame;
+  </script>
+</html>

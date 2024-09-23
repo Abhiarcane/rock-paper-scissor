@@ -1,0 +1,249 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900&display=swap");
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  background-color: #8cc461;
+  font-family: "roboto", sans-serif;
+}
+
+.heading {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+  border: 2px solid white;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  margin: 1rem auto;
+}
+
+.heading-left {
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: white;
+  letter-spacing: 0.3rem;
+}
+
+.heading-right {
+  display: flex;
+  gap: 2rem;
+  color: #fff;
+  justify-content: center;
+}
+
+.score-box {
+  background-color: white;
+  border-radius: 0.3rem;
+  width: 8rem;
+}
+
+.score {
+  font-size: 1.2rem;
+  color: #656565;
+  text-align: center;
+}
+
+.number {
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 700;
+  color: black;
+}
+
+.win {
+  display: none;
+}
+/* Icon Box and Positioning */
+.icon-box {
+  position: relative;
+  width: 30rem;
+  height: 24rem;
+  margin: 5rem;
+}
+
+.fig {
+  position: absolute;
+  width: 5rem;
+}
+
+.fig1 {
+  top: 0;
+  left: 5%;
+}
+
+.fig2 {
+  top: 0;
+  right: 5%;
+}
+
+.fig3 {
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-65%) translateY(4.7rem);
+}
+
+.action {
+  transform: translateY(-8rem) translateX(3rem);
+}
+
+.scissor {
+  transform: translateY(-7.5rem) translateX(4rem);
+}
+
+.fist {
+  transform: translateY(-7.5rem) translateX(2.5rem);
+}
+
+.hand {
+  transform: translateY(-7.5rem) translateX(3rem);
+}
+
+.btns {
+  position: absolute;
+  right: 2rem;
+  bottom: 1rem;
+}
+
+.btn {
+  background-color: transparent;
+  color: white;
+  border: 1px solid white;
+  padding: 0.4rem 1rem;
+  border-radius: 0.3rem;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+}
+.rules {
+  margin-right: 1rem;
+}
+
+.rules-box {
+  position: absolute;
+  right: 2rem;
+  bottom: 4rem;
+  margin-bottom: 4rem;
+  border: 10px solid white;
+  padding: 2rem;
+  width: 20rem;
+  background-color: #004429;
+  color: white;
+  border-radius: 0.5rem;
+}
+
+.xbtn {
+  background-color: red;
+  padding: 0.7rem 1rem;
+  border-radius: 50%;
+  border: 6px solid white;
+  position: absolute;
+  right: -2rem;
+  top: -2rem;
+  z-index: 999;
+}
+.rules-box ul li {
+  margin-bottom: 2rem;
+}
+.rules-box ul li:nth-child() {
+  margin-bottom: 0px;
+}
+
+.rules-heading {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+.line1 {
+  position: absolute;
+  top: 4rem; /* Adjusted to avoid overlap */
+  left: 5rem;
+  width: 20rem;
+  height: 1rem;
+
+  z-index: -1;
+}
+
+.line2 {
+  position: absolute;
+  top: 6rem;
+  left: 10rem;
+  width: 4rem;
+  height: 17rem;
+  z-index: -1;
+  transform: rotate(-50deg);
+}
+
+.line3 {
+  position: absolute;
+  top: 5rem;
+  left: 20rem;
+  width: 4rem;
+  height: 18rem;
+  z-index: -1;
+  transform: rotate(45deg);
+}
+
+.result-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 5rem;
+  padding: 2rem;
+  background-color: #f0f0f0;
+  border-radius: 1rem;
+  width: 80%; /* Adjust width */
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  position: relative;
+  height: 10rem;
+  flex-direction: column;
+  background-color: #8cc461;
+}
+
+.player-fig {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+}
+
+.computer-fig {
+  position: absolute;
+  top: 2rem;
+  right: 6rem;
+}
+.player-fig img,
+.computer-fig img {
+  max-width: 150px; /* Adjust size of the full figure */
+  height: auto;
+}
+
+.result-text {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  padding: 1rem;
+  color: white;
+  border-radius: 0.5rem;
+  width: 200px;
+  letter-spacing: 0.3rem;
+}
+
+.against-pc {
+  font-size: 1.3rem;
+}
+
+.play-again-button {
+  padding: 0.75rem 2rem;
+  background-color: #fff;
+  color: #6b6b6b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 0.5rem;
+  letter-spacing: 0.1rem;
+  cursor: pointer;
+}
